@@ -66,7 +66,16 @@
         "xtr1common": "cpp",
         "xtree": "cpp",
         "xutility": "cpp",
-        "array": "cpp"
+        "array": "cpp",
+        "atomic": "cpp",
+        "chrono": "cpp",
+        "condition_variable": "cpp",
+        "future": "cpp",
+        "mutex": "cpp",
+        "queue": "cpp",
+        "ratio": "cpp",
+        "xthread": "cpp",
+        "thread": "cpp"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }
