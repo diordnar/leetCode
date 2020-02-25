@@ -21,6 +21,11 @@
                 "reveal": "always"
             },
             "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "clean",
+            "type": "shell",
+            "command": "..\\cpp\\clean.bat"
         }
     ]
 }
