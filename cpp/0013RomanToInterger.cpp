@@ -154,7 +154,7 @@ private:
     }
 };
 
-class Solution
+class Solution3
 {
 public:
     int romanToInt(string s)
