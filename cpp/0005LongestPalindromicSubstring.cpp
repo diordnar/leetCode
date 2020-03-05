@@ -23,7 +23,7 @@ public:
             }
             if (right - left - 1 > maxLen)
             {
-                maxLen = right - left - 1;
+                maxLen = right - left - 1; // maxLen = right - left + 1 - 2
                 start = left + 1;
             }
         }
@@ -83,6 +83,40 @@ private:
     }
 };
 
+class Solution3
+{
+public:
+    string longestPalindrome(string s)
+    {
+        auto len = s.length();
+        int start = 0;
+        int maxLen = 1;
+        if (len < 2)
+            return s;
+
+        vector<vector<int>> dp(len, vector<int>(len, 0));
+
+        // NOT supported by C++ Standard;Supported by g++ as extended feature;Not supported by MSVC
+        // int dp[len][len] = {0};
+        for (int j = 1; j < len; ++j)
+        {
+            for (int i = 0; i < j; ++i)
+            {
+                if (s[i] == s[j] && (j - i <= 2 || dp[i + 1][j - 1]) == 1)
+                {
+                    dp[i][j] = 1;
+                    if (j - i + 1 > maxLen)
+                    {
+                        maxLen = j - i + 1;
+                        start = i;
+                    }
+                }
+            }
+        }
+        return s.substr(start, maxLen);
+    }
+};
+
 int main()
 {
     string str = "admmccbabccadd";
@@ -90,5 +124,7 @@ int main()
     cout << slv.longestPalindrome(str) << endl;
     Solution2 slv2;
     cout << slv2.longestPalindrome(str) << endl;
+    Solution3 slv3;
+    cout << slv3.longestPalindrome(str) << endl;
     return 0;
 }
