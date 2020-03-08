@@ -68,12 +68,10 @@ public:
         }
         if (sz == 1)
             return nums[0];
-        int prevMax = 0;
-        int currMax = 0;
 
-        int dp_i = 0;
-        int dp_i_1 = max(nums[0], nums[1]);
         int dp_i_2 = nums[0];
+        int dp_i_1 = max(nums[0], nums[1]);
+        int dp_i = dp_i_1; // 只有两个房间时返回两个中的最大
         for (int i = 2; i < sz; ++i)
         {
             dp_i = max(dp_i_1, nums[i] + dp_i_2);
@@ -82,8 +80,8 @@ public:
         }
         return dp_i;
 
-        // prevMax = nums[0];
-        // currMax = max(nums[0], nums[1]);
+        // int prevMax = nums[0];
+        // int currMax = max(nums[0], nums[1]);
         // for (int i = 2; i < sz; ++i)
         // {
         //     // dp[i] = max(dp[i - 2] + nums[i], dp[i - 1])
@@ -97,8 +95,8 @@ public:
 
 int main()
 {
-    vector<int> vec1{1, 2, 3, 1};
-    vector<int> vec2{2, 7, 9, 3, 1};
+    vector<int> vec1{1, 2, 3, 1};    // 4
+    vector<int> vec2{2, 7, 9, 3, 1}; // 12
     Solution slv;
     cout << slv.rob(vec1) << endl;
     cout << slv.rob(vec2) << endl;
