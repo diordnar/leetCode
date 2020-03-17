@@ -3,7 +3,20 @@
 #include <unordered_map>
 
 using namespace std;
+// 76. 最小覆盖子串
+// 给你一个字符串 S、一个字符串 T，请在字符串 S 里面找出：包含 T 所有字母的最小子串。
 
+// 示例：
+// 输入: S = "ADOBECODEBANC", T = "ABC"
+// 输出: "BANC"
+
+// 说明：
+//     如果 S 中不存这样的子串，则返回空字符串 ""。
+//     如果 S 中存在这样的子串，我们保证它是唯一的答案。
+
+// 来源：力扣（LeetCode）
+// 链接：https://leetcode-cn.com/problems/minimum-window-substring
+// 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 class Solution
 {
 public:
@@ -100,10 +113,77 @@ public:
     }
 };
 
+class Solution3
+{
+public:
+    string minWindow(string s, string t)
+    {
+        unordered_map<char, int> map;
+        for (auto c : t)
+            map[c]++;
+        int left = 0, cnt = 0, maxlen = s.size() + 1, start = left;
+        for (int i = 0; i < s.size(); ++i)
+        {
+            if (--map[s[i]] >= 0)
+                ++cnt;
+            while (cnt == t.size())
+            {
+                if (maxlen > i - left + 1)
+                {
+                    maxlen = i - left + 1;
+                    start = left;
+                }
+                if (++map[s[left]] > 0)
+                    cnt--;
+                left++;
+            }
+        }
+        return maxlen == s.size() + 1 ? "" : s.substr(start, maxlen);
+    }
+};
+
+class Solution33 // Solution3
+{
+public:
+    string minWindow(string s, string t)
+    {
+        int left = 0, right = 0, start = left, cnt = 0, minLen = INT_MAX;
+        unordered_map<char, int> map;
+        for (auto c : t)
+        {
+            ++map[c];
+        }
+
+        for (; right < s.length(); ++right)
+        {
+            if (--map[s[right]] >= 0)
+            {
+                ++cnt;
+            }
+
+            while (cnt == t.length())
+            {
+                if (minLen > right - left + 1)
+                {
+                    minLen = right - left + 1;
+                    start = left;
+                }
+                if (++map[s[left]] > 0)
+                {
+                    --cnt;
+                }
+                ++left;
+            }
+        }
+
+        return minLen == INT_MAX ? "" : s.substr(start, minLen);
+    }
+};
+
 int main()
 {
     string S = "ADOBECODEBANC", T = "ABC";
-    Solution slv;
+    Solution33 slv;
     cout << slv.minWindow(S, T) << endl;
     return 0;
 }
