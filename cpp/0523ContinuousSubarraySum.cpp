@@ -43,8 +43,8 @@ public:
         {
             for (int j = i + 1; j <= n; ++j)
             {
-                int sum = preSum[j] - preSum[i] + nums[i - 1];
-                if (k == sum || (k != 0 && 0 == sum % k))
+                int sum = preSum[j] - preSum[i] + nums[i - 1]; // 数组的长度最少为 2
+                if (k == sum || (k != 0 && 0 == sum % k))      // k == sum, [0,0] k=0
                 {
                     return true;
                 }
