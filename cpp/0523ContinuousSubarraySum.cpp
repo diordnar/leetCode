@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <unordered_map>
+#include <unordered_set>
 
 using namespace std;
 
@@ -76,6 +77,23 @@ class Solution2
 public:
     bool checkSubarraySum(vector<int> &nums, int k)
     {
+        int cache = 0;
+        int len = nums.size();
+        unordered_set<int> set;
+        vector<int> sum(len + 1, 0);
+        for (int i = 0; i < len; ++i)
+        {
+            sum[i + 1] = sum[i] + nums[i];
+            int res = k == 0 ? sum[i + 1] : sum[i + 1] % k;
+            if (set.find(res) != set.end())
+            {
+                return true;
+            }
+
+            set.insert(cache); // 要求数组的长度为2，利用缓存延迟加入set中
+            cache = res;
+        }
+        return false;
     }
 };
 int main()
@@ -87,5 +105,7 @@ int main()
     int k2 = 5;
     Solution slv;
     cout << boolalpha << slv.checkSubarraySum(vec, k) << noboolalpha << endl;
+    Solution2 slv2;
+    cout << boolalpha << slv2.checkSubarraySum(vec, k) << noboolalpha << endl;
     return 0;
 }
