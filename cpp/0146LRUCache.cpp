@@ -76,6 +76,43 @@ private:
     unordered_map<int, list<pair<int, int>>::iterator> hash;
 };
 
+class LRUCache2
+{
+public:
+    LRUCache2(int capacity) : cap(capacity)
+    {
+    }
+    int get(int key)
+    {
+        if (umap.find(key != umap.end()))
+        {
+            put(key, umap[key]->second);
+            return umap[key]->second;
+        }
+        return -1;
+    }
+
+    void put(int key, int value)
+    {
+        if (umap.find(key) != umap.end())
+        {
+            cache.erase(umap[key]);
+        }
+        else if (cache.size() >= cap)
+        {
+            umap.erase(cache.back().first);
+            cache.pop_back();
+        }
+        cache.push_front({key, value});
+        umap[key] = cache.begin();
+    }
+
+private:
+    int cap;
+    list<pair<int, int>> cache;
+    unordered_map<int, list<pair<int, int>>::iterator> umap;
+};
+
 int main()
 {
     LRUCache cache(2);
