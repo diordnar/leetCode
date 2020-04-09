@@ -291,6 +291,46 @@ public:
 // Sliding Window END
 /******************************* 双指针 End   *****************************************/
 
+/******************************* 动态规划 Start *****************************************/
+class C72
+{
+public:
+    int minDistance(string word1, string word2)
+    {
+        int len1 = word1.length();
+        int len2 = word2.length();
+        vector<vector<int>> dp(len1 + 1, vector<int>(len2 + 1, 0));
+
+        for (int i = 0; i <= len1; ++i)
+        {
+            dp[i][0] = i;
+        }
+        for (int j = 0; j <= len2; ++j)
+        {
+            dp[0][j] = j;
+        }
+
+        for (int i = 0; i < len1; ++i)
+        {
+            for (int j = 0; j < len2; ++j)
+            {
+                if (word1[i] == word2[j])
+                {
+                    dp[i + 1][j + 1] = dp[i][j];
+                }
+                else
+                {
+                    dp[i + 1][j + 1] = min({dp[i][j + 1] + 1, // Delete
+                                            dp[i + 1][j] + 1, // Insert
+                                            dp[i][j] + 1});   // Replace
+                }
+            }
+        }
+
+        return dp[len1][len2];
+    }
+};
+/******************************* 动态规划 End *****************************************/
 int main()
 {
     /******************************* 双指针 Start *****************************************/
@@ -319,5 +359,14 @@ int main()
 
     // Sliding Window END
     /******************************* 双指针 End   *****************************************/
+    cout << endl;
+    /******************************* 动态规划 Start ***************************************/
+    {
+        C72 c72;
+        string s1 = "horse";
+        string s2 = "ros";
+        cout << c72.minDistance(s1, s2) << endl;
+    }
+    /******************************* 动态规划 End *****************************************/
     return 0;
 }

@@ -69,7 +69,7 @@ public:
         {
             for (int j = 1; j <= len2; ++j)
             {
-                if (word1[i] == word2[j])
+                if (word1[i - 1] == word2[j - 1])
                 {
                     dp[i][j] = dp[i - 1][j - 1];
                 }
