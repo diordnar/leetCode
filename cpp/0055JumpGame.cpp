@@ -25,16 +25,16 @@ class Solution
 public:
     bool canJump(vector<int> &nums)
     {
-        int fastest = 0;
+        int farthest = 0;
         int len = nums.size();
         for (int i = 0; i < len; ++i)
         {
-            if (fastest < i) // 如果当前位置大于能跳到的最远位置，则失败
+            if (farthest < i) // 如果当前位置大于能跳到的最远位置，则失败
             {
                 return false;
             }
-            fastest = max(fastest, i + nums[i]);
-            if (fastest >= len - 1)
+            farthest = max(fastest, i + nums[i]);
+            if (farthest >= len - 1)
             {
                 return true;
             }
