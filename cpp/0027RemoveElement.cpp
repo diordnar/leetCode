@@ -50,12 +50,49 @@ public:
         auto last = first + cnt;
         while (last != nums.end())
         {
-            *first = *last;
-            ++first;
-            ++last;
+            *first++ = *last++;
         }
-
         return sz - cnt;
+    }
+};
+
+class Solution1
+{
+public:
+    int removeElement(vector<int> &nums, int val)
+    {
+        int slow = 0, len = nums.size();
+        for (int fast = 0; fast < len; ++fast)
+        {
+            if (nums[fast] != val)
+            {
+                nums[slow] = nums[fast];
+                ++slow;
+            }
+        }
+        return slow;
+    }
+};
+
+class Solution2
+{
+public:
+    int removeElement(vector<int> &nums, int val)
+    {
+        int len = nums.size();
+        for (int i = 0; i < len;)
+        {
+            if (nums[i] == val)
+            {
+                nums[i] = nums[len - 1];
+                --len;
+            }
+            else
+            {
+                ++i;
+            }
+        }
+        return len;
     }
 };
 
