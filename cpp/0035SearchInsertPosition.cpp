@@ -1,12 +1,3 @@
-/*
- * @Description: 
- * @Author: 徐小明
- * @Date: 2020-05-31 14:46:05
- * @LastEditors: 徐小明
- * @LastEditTime: 2020-05-31 18:07:16
- * @FilePath: \cpp\0035SearchInsertPosition.cpp
- */
-
 // 35. Search Insert Position
 // 35. 搜索插入位置
 // 给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，
