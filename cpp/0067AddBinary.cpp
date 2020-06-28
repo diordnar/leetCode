@@ -68,6 +68,30 @@ public:
     }
 };
 
+class Solution1
+{
+public:
+    string addBinary(string a, string b)
+    {
+        int len1 = a.size(), len2 = b.size(), carry = 0;
+        string res;
+
+        for (int i = len1 - 1, j = len2 - 1; i >= 0 || j >= 0; --j, --i)
+        {
+            carry += i >= 0 ? (a[i] == '1') : 0;
+            carry += j >= 0 ? (b[i] == '1') : 0;
+            res.push_back((carry % 2) ? '1' : '0');
+            carry /= 2;
+        }
+        if (carry)
+        {
+            res.push_back('1');
+        }
+        reverse(res.begin(), res.end());
+        return res;
+    }
+};
+
 class Solution2
 {
 public:
