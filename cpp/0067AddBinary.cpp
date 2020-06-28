@@ -18,6 +18,8 @@
 // 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 #include <string>
 #include <stack>
+#include <algorithm>
+
 using namespace std;
 
 class Solution
@@ -62,6 +64,33 @@ public:
             res += (stk.top() + '0');
             stk.pop();
         }
+        return res;
+    }
+};
+
+class Solution2
+{
+public:
+    string addBinary(string a, string b)
+    {
+        reverse(a.begin(), a.end());
+        reverse(b.begin(), b.end());
+        int n = max(a.size(), b.size());
+        string res;
+        int carry = 0;
+
+        for (int i = 0; i < n; ++i)
+        {
+            carry += i < a.size() ? (a[i] == '1') : 0;
+            carry += i < b.size() ? (b[i] == '1') : 0;
+            res.push_back((carry % 2) ? '1' : '0');
+            carry /= 2;
+        }
+        if (carry)
+        {
+            res.push_back('1');
+        }
+        reverse(res.begin(), res.end());
         return res;
     }
 };
