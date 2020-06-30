@@ -79,7 +79,7 @@ public:
         for (int i = len1 - 1, j = len2 - 1; i >= 0 || j >= 0; --j, --i)
         {
             carry += i >= 0 ? (a[i] == '1') : 0;
-            carry += j >= 0 ? (b[i] == '1') : 0;
+            carry += j >= 0 ? (b[j] == '1') : 0;
             res.push_back((carry % 2) ? '1' : '0');
             carry /= 2;
         }
