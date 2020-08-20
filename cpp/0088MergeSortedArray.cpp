@@ -1,11 +1,3 @@
-/*
- * @Description: 
- * @Author: 徐小明
- * @Date: 2020-06-30 12:51:08
- * @LastEditors: 徐小明
- * @LastEditTime: 2020-06-30 14:40:26
- * @FilePath: \cpp\0088MergeSortedArray.cpp
- */
 // 88. 合并两个有序数组
 // 给你两个有序整数数组 nums1 和 nums2，请你将 nums2 合并到 nums1 中，使 nums1 成为一个有序数组。
 
@@ -70,6 +62,19 @@ public:
             nums1[idx--] = nums1[i] > nums2[j] ? nums1[i--] : nums2[j--];
         }
         copy_n(nums2.begin(), j + 1, nums1.begin());
+    }
+};
+
+class Solution3
+{
+public:
+    void merge(vector<int> &nums1, int m, vector<int> &nums2, int n)
+    {
+        int idx = m + n - 1, i = m - 1, j = n - 1;
+        while (j >= 0)
+        {
+            nums1[idx--] = (i >= 0 && nums1[i] > nums2[j]) ? nums1[i--] : nums2[j--];
+        }
     }
 };
 
