@@ -154,6 +154,67 @@ public:
     }
 };
 
+class Solution3
+{
+public:
+    // Brute Force 2
+    int searchInsert(vector<int> &nums, int target)
+    {
+        int sz = nums.size();
+
+        for (int i = 0; i < sz; ++i)
+        {
+            if (nums[i] >= target)
+            {
+                // 情况：目标值在数组头
+                // 情况：目标值等于数组中的该元素
+                // 情况：目标值的插入位置
+                return i;
+            }
+        }
+
+        // 情况：数组长度为0
+        // 情况：目标值在数组末尾
+        return sz;
+    }
+};
+
+class Solution4
+{
+public:
+    // Binary Search
+    int searchInsert(vector<int> &nums, int target)
+    {
+        int sz = nums.size();
+        int left = 0;
+        int right = sz - 1;
+
+        while (left <= right)
+        {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] > target)
+            {
+                right = mid - 1;
+            }
+            else if (nums[mid] < target)
+            {
+                left = mid + 1;
+            }
+            else if (nums[mid] == target)
+            {
+                // 情况：目标值等于数组中的该元素
+                return mid;
+            }
+        }
+
+        // 情况：目标值在数组头, 此时[left = 0, right = -1]
+        // 情况：数组长度为0, 此时[left = 0, right = -1]
+        // 情况：目标值在数组末尾, 此时[left = sz, right = sz - 1]
+        // 情况：目标值在数组中间
+        return right + 1; // 或 return left;
+    }
+};
+
 int main()
 {
     return 0;
